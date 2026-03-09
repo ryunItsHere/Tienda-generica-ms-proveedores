@@ -8,7 +8,7 @@ public class ProveedorDTO {
 	private String ciudad_proveedor;
 	private String direccion_proveedor;
 	private Integer nit_proveedor;
-	private String nombre_poveedor;
+	private String nombre_proveedor;
 	private String telefono_proveedor;
 	
 	public ProveedorDTO() {
@@ -16,13 +16,13 @@ public class ProveedorDTO {
 	}
 
 	public ProveedorDTO(Long id, String ciudad_proveedor, String direccion_proveedor, Integer nit_proveedor,
-			String nombre_poveedor, String telefono_proveedor) {
+			String nombre_proveedor, String telefono_proveedor) {
 		super();
 		this.id = id;
 		this.ciudad_proveedor = ciudad_proveedor;
 		this.direccion_proveedor = direccion_proveedor;
 		this.nit_proveedor = nit_proveedor;
-		this.nombre_poveedor = nombre_poveedor;
+		this.nombre_proveedor = nombre_proveedor;
 		this.telefono_proveedor = telefono_proveedor;
 	}
 
@@ -58,12 +58,12 @@ public class ProveedorDTO {
 		this.nit_proveedor = nit_proveedor;
 	}
 
-	public String getNombre_poveedor() {
-		return nombre_poveedor;
+	public String getNombre_proveedor() {
+		return nombre_proveedor;
 	}
 
-	public void setNombre_poveedor(String nombre_poveedor) {
-		this.nombre_poveedor = nombre_poveedor;
+	public void setNombre_proveedor(String nombre_proveedor) {
+		this.nombre_proveedor = nombre_proveedor;
 	}
 
 	public String getTelefono_proveedor() {
@@ -76,7 +76,7 @@ public class ProveedorDTO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ciudad_proveedor, direccion_proveedor, id, nit_proveedor, nombre_poveedor,
+		return Objects.hash(ciudad_proveedor, direccion_proveedor, id, nit_proveedor, nombre_proveedor,
 				telefono_proveedor);
 	}
 
@@ -92,7 +92,7 @@ public class ProveedorDTO {
 		return Objects.equals(ciudad_proveedor, other.ciudad_proveedor)
 				&& Objects.equals(direccion_proveedor, other.direccion_proveedor) && Objects.equals(id, other.id)
 				&& Objects.equals(nit_proveedor, other.nit_proveedor)
-				&& Objects.equals(nombre_poveedor, other.nombre_poveedor)
+				&& Objects.equals(nombre_proveedor, other.nombre_proveedor)
 				&& Objects.equals(telefono_proveedor, other.telefono_proveedor);
 	}
 	

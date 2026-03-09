@@ -1,6 +1,5 @@
 package co.edu.unbosque.TiendaGenericaProveedores.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -26,7 +25,7 @@ public class Proveedor {
 	private String direccion_proveedor;
 
 	@Column(unique = true, nullable = false)
-	private String nit_proveedor;
+	private Integer nit_proveedor;
 
 	@Column(nullable = false, length = 80)
 	private String nombre_proveedor;
@@ -38,7 +37,7 @@ public class Proveedor {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Proveedor(Long id, String ciudad_proveedor, String direccion_proveedor, String nit_proveedor,
+	public Proveedor(Long id, String ciudad_proveedor, String direccion_proveedor, Integer nit_proveedor,
 			String nombre_proveedor, String telefono_proveedor) {
 		super();
 		this.id = id;
@@ -73,11 +72,11 @@ public class Proveedor {
 		this.direccion_proveedor = direccion_proveedor;
 	}
 
-	public String getNit_proveedor() {
+	public Integer getNit_proveedor() {
 		return nit_proveedor;
 	}
 
-	public void setNit_proveedor(String nit_proveedor) {
+	public void setNit_proveedor(Integer nit_proveedor) {
 		this.nit_proveedor = nit_proveedor;
 	}
 
