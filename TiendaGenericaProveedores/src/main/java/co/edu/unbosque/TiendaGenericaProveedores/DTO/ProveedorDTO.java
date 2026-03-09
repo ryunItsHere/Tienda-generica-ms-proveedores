@@ -2,28 +2,29 @@ package co.edu.unbosque.TiendaGenericaProveedores.DTO;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ProveedorDTO {
-	
+
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private Long id;
-	private String ciudad_proveedor;
-	private String direccion_proveedor;
-	private Integer nit_proveedor;
-	private String nombre_proveedor;
-	private String telefono_proveedor;
-	
+	private String ciudadProveedor;
+	private String direccionProveedor;
+	private Integer nitProveedor;
+	private String nombreProveedor;
+	private String telefonoProveedor;
+
 	public ProveedorDTO() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public ProveedorDTO(Long id, String ciudad_proveedor, String direccion_proveedor, Integer nit_proveedor,
-			String nombre_proveedor, String telefono_proveedor) {
+	public ProveedorDTO(String ciudadProveedor, String direccionProveedor, Integer nitProveedor,
+			String nombreProveedor, String telefonoProveedor) {
 		super();
-		this.id = id;
-		this.ciudad_proveedor = ciudad_proveedor;
-		this.direccion_proveedor = direccion_proveedor;
-		this.nit_proveedor = nit_proveedor;
-		this.nombre_proveedor = nombre_proveedor;
-		this.telefono_proveedor = telefono_proveedor;
+		this.ciudadProveedor = ciudadProveedor;
+		this.direccionProveedor = direccionProveedor;
+		this.nitProveedor = nitProveedor;
+		this.nombreProveedor = nombreProveedor;
+		this.telefonoProveedor = telefonoProveedor;
 	}
 
 	public Long getId() {
@@ -34,50 +35,49 @@ public class ProveedorDTO {
 		this.id = id;
 	}
 
-	public String getCiudad_proveedor() {
-		return ciudad_proveedor;
+	public String getCiudadProveedor() {
+		return ciudadProveedor;
 	}
 
-	public void setCiudad_proveedor(String ciudad_proveedor) {
-		this.ciudad_proveedor = ciudad_proveedor;
+	public void setCiudadProveedor(String ciudadProveedor) {
+		this.ciudadProveedor = ciudadProveedor;
 	}
 
-	public String getDireccion_proveedor() {
-		return direccion_proveedor;
+	public String getDireccionProveedor() {
+		return direccionProveedor;
 	}
 
-	public void setDireccion_proveedor(String direccion_proveedor) {
-		this.direccion_proveedor = direccion_proveedor;
+	public void setDireccionProveedor(String direccionProveedor) {
+		this.direccionProveedor = direccionProveedor;
 	}
 
-	public Integer getNit_proveedor() {
-		return nit_proveedor;
+	public Integer getNitProveedor() {
+		return nitProveedor;
 	}
 
-	public void setNit_proveedor(Integer nit_proveedor) {
-		this.nit_proveedor = nit_proveedor;
+	public void setNitProveedor(Integer nitProveedor) {
+		this.nitProveedor = nitProveedor;
 	}
 
-	public String getNombre_proveedor() {
-		return nombre_proveedor;
+	public String getNombreProveedor() {
+		return nombreProveedor;
 	}
 
-	public void setNombre_proveedor(String nombre_proveedor) {
-		this.nombre_proveedor = nombre_proveedor;
+	public void setNombreProveedor(String nombreProveedor) {
+		this.nombreProveedor = nombreProveedor;
 	}
 
-	public String getTelefono_proveedor() {
-		return telefono_proveedor;
+	public String getTelefonoProveedor() {
+		return telefonoProveedor;
 	}
 
-	public void setTelefono_proveedor(String telefono_proveedor) {
-		this.telefono_proveedor = telefono_proveedor;
+	public void setTelefonoProveedor(String telefonoProveedor) {
+		this.telefonoProveedor = telefonoProveedor;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ciudad_proveedor, direccion_proveedor, id, nit_proveedor, nombre_proveedor,
-				telefono_proveedor);
+		return Objects.hash(ciudadProveedor, direccionProveedor, id, nitProveedor, nombreProveedor, telefonoProveedor);
 	}
 
 	@Override
@@ -89,15 +89,11 @@ public class ProveedorDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		ProveedorDTO other = (ProveedorDTO) obj;
-		return Objects.equals(ciudad_proveedor, other.ciudad_proveedor)
-				&& Objects.equals(direccion_proveedor, other.direccion_proveedor) && Objects.equals(id, other.id)
-				&& Objects.equals(nit_proveedor, other.nit_proveedor)
-				&& Objects.equals(nombre_proveedor, other.nombre_proveedor)
-				&& Objects.equals(telefono_proveedor, other.telefono_proveedor);
+		return Objects.equals(ciudadProveedor, other.ciudadProveedor)
+				&& Objects.equals(direccionProveedor, other.direccionProveedor)
+				&& Objects.equals(id, other.id)
+				&& Objects.equals(nitProveedor, other.nitProveedor)
+				&& Objects.equals(nombreProveedor, other.nombreProveedor)
+				&& Objects.equals(telefonoProveedor, other.telefonoProveedor);
 	}
-	
-	
-	
-	
-
 }

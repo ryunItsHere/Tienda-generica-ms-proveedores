@@ -18,34 +18,32 @@ public class Proveedor {
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private Long id;
 
-	@Column(nullable = false, length = 20)
-	private String ciudad_proveedor;
+	@Column( nullable = false, length = 20)
+	private String ciudadProveedor;
 
-	@Column(nullable = false, length = 20)
-	private String direccion_proveedor;
+	@Column (nullable = false, length = 20)
+	private String direccionProveedor;
 
-	@Column(unique = true, nullable = false)
-	private Integer nit_proveedor;
+	@Column( unique = true, nullable = false)
+	private Integer nitProveedor;
 
-	@Column(nullable = false, length = 80)
-	private String nombre_proveedor;
+	@Column( nullable = false, length = 80)
+	private String nombreProveedor;
 
-	@Column(nullable = false, length = 20)
-	private String telefono_proveedor;
+	@Column( nullable = false, length = 20)
+	private String telefonoProveedor;
 
 	public Proveedor() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public Proveedor(Long id, String ciudad_proveedor, String direccion_proveedor, Integer nit_proveedor,
-			String nombre_proveedor, String telefono_proveedor) {
+	public Proveedor(String ciudadProveedor, String direccionProveedor, Integer nitProveedor,
+			String nombreProveedor, String telefonoProveedor) {
 		super();
-		this.id = id;
-		this.ciudad_proveedor = ciudad_proveedor;
-		this.direccion_proveedor = direccion_proveedor;
-		this.nit_proveedor = nit_proveedor;
-		this.nombre_proveedor = nombre_proveedor;
-		this.telefono_proveedor = telefono_proveedor;
+		this.ciudadProveedor = ciudadProveedor;
+		this.direccionProveedor = direccionProveedor;
+		this.nitProveedor = nitProveedor;
+		this.nombreProveedor = nombreProveedor;
+		this.telefonoProveedor = telefonoProveedor;
 	}
 
 	public Long getId() {
@@ -56,44 +54,44 @@ public class Proveedor {
 		this.id = id;
 	}
 
-	public String getCiudad_proveedor() {
-		return ciudad_proveedor;
+	public String getCiudadProveedor() {
+		return ciudadProveedor;
 	}
 
-	public void setCiudad_proveedor(String ciudad_proveedor) {
-		this.ciudad_proveedor = ciudad_proveedor;
+	public void setCiudadProveedor(String ciudadProveedor) {
+		this.ciudadProveedor = ciudadProveedor;
 	}
 
-	public String getDireccion_proveedor() {
-		return direccion_proveedor;
+	public String getDireccionProveedor() {
+		return direccionProveedor;
 	}
 
-	public void setDireccion_proveedor(String direccion_proveedor) {
-		this.direccion_proveedor = direccion_proveedor;
+	public void setDireccionProveedor(String direccionProveedor) {
+		this.direccionProveedor = direccionProveedor;
 	}
 
-	public Integer getNit_proveedor() {
-		return nit_proveedor;
+	public Integer getNitProveedor() {
+		return nitProveedor;
 	}
 
-	public void setNit_proveedor(Integer nit_proveedor) {
-		this.nit_proveedor = nit_proveedor;
+	public void setNitProveedor(Integer nitProveedor) {
+		this.nitProveedor = nitProveedor;
 	}
 
-	public String getNombre_proveedor() {
-		return nombre_proveedor;
+	public String getNombreProveedor() {
+		return nombreProveedor;
 	}
 
-	public void setNombre_proveedor(String nombre_proveedor) {
-		this.nombre_proveedor = nombre_proveedor;
+	public void setNombreProveedor(String nombreProveedor) {
+		this.nombreProveedor = nombreProveedor;
 	}
 
-	public String getTelefono_proveedor() {
-		return telefono_proveedor;
+	public String getTelefonoProveedor() {
+		return telefonoProveedor;
 	}
 
-	public void setTelefono_proveedor(String telefono_proveedor) {
-		this.telefono_proveedor = telefono_proveedor;
+	public void setTelefonoProveedor(String telefonoProveedor) {
+		this.telefonoProveedor = telefonoProveedor;
 	}
 
 }

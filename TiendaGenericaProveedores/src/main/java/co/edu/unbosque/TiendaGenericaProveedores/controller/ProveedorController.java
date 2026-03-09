@@ -32,11 +32,11 @@ public class ProveedorController {
 
 		switch (status) {
 		case 0:
-			return new ResponseEntity<>("{Proveedor creado correctamente}", HttpStatus.CREATED);
+			return new ResponseEntity<>("Proveedor creado correctamente", HttpStatus.CREATED);
 		case 1:
-			return new ResponseEntity<>("{Error al crear proveedor, NIT ya en uso}", HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity<>("Error al crear proveedor, NIT ya en uso", HttpStatus.NOT_ACCEPTABLE);
 		default:
-			return new ResponseEntity<>("{Error al crear proveedor}", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("Error al crear proveedor", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -48,7 +48,7 @@ public class ProveedorController {
 		if (proveedores.isEmpty()) {
 			return new ResponseEntity<>(proveedores, HttpStatus.NO_CONTENT);
 		} else {
-			return new ResponseEntity<>(proveedores, HttpStatus.ACCEPTED);
+			return new ResponseEntity<>(proveedores, HttpStatus.OK);
 		}
 	}
 
@@ -58,7 +58,7 @@ public class ProveedorController {
 		Proveedor found = proveedorServ.getById(id);
 
 		if (found != null) {
-			return new ResponseEntity<>(found, HttpStatus.ACCEPTED);
+			return new ResponseEntity<>(found, HttpStatus.OK);
 		} else {
 			return ResponseEntity.notFound().build();
 		}
@@ -70,7 +70,7 @@ public class ProveedorController {
 		boolean found = proveedorServ.exist(id);
 
 		if (found) {
-			return new ResponseEntity<>(true, HttpStatus.ACCEPTED);
+			return new ResponseEntity<>(true, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(false, HttpStatus.NO_CONTENT);
 		}
@@ -84,7 +84,7 @@ public class ProveedorController {
 		if (result.isEmpty()) {
 			return new ResponseEntity<>(result, HttpStatus.NO_CONTENT);
 		} else {
-			return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+			return new ResponseEntity<>(result, HttpStatus.OK);
 		}
 	}
 
@@ -96,7 +96,7 @@ public class ProveedorController {
 		if (result.isEmpty()) {
 			return new ResponseEntity<>(result, HttpStatus.NO_CONTENT);
 		} else {
-			return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
+			return new ResponseEntity<>(result, HttpStatus.OK);
 		}
 	}
 
@@ -107,9 +107,9 @@ public class ProveedorController {
 
 		switch (status) {
 		case 0:
-			return new ResponseEntity<>("Proveedor actualizado correctamente", HttpStatus.ACCEPTED);
+			return new ResponseEntity<>("Proveedor actualizado correctamente", HttpStatus.OK);
 		case 1:
-			return new ResponseEntity<>("NIT ya en uso", HttpStatus.IM_USED);
+			return new ResponseEntity<>("NIT ya en uso", HttpStatus.CONFLICT);
 		case 2:
 			return new ResponseEntity<>("Proveedor no encontrado", HttpStatus.NOT_FOUND);
 		default:
@@ -123,7 +123,7 @@ public class ProveedorController {
 		int status = proveedorServ.deleteById(id);
 
 		if (status == 0) {
-			return new ResponseEntity<>("Proveedor eliminado correctamente", HttpStatus.ACCEPTED);
+			return new ResponseEntity<>("Proveedor eliminado correctamente", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("Error al eliminar proveedor, no encontrado", HttpStatus.NOT_FOUND);
 		}

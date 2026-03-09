@@ -25,17 +25,17 @@ public class ProveedorService {
 
 	public int create(ProveedorDTO dto) {
 
-		if (proveedorRepo.existsByNit_proveedor(dto.getNit_proveedor())) {
+		if (proveedorRepo.existsByNitProveedor(dto.getNitProveedor())) {
 			return 1;
 		}
 
 		Proveedor proveedor = new Proveedor();
 
-		proveedor.setCiudad_proveedor(dto.getCiudad_proveedor());
-		proveedor.setDireccion_proveedor(dto.getDireccion_proveedor());
-		proveedor.setNit_proveedor(dto.getNit_proveedor());
-		proveedor.setNombre_proveedor(dto.getNombre_proveedor());
-		proveedor.setTelefono_proveedor(dto.getTelefono_proveedor());
+		proveedor.setCiudadProveedor(dto.getCiudadProveedor());
+		proveedor.setDireccionProveedor(dto.getDireccionProveedor());
+		proveedor.setNitProveedor(dto.getNitProveedor());
+		proveedor.setNombreProveedor(dto.getNombreProveedor());
+		proveedor.setTelefonoProveedor(dto.getTelefonoProveedor());
 
 		proveedorRepo.save(proveedor);
 
@@ -52,11 +52,11 @@ public class ProveedorService {
 	}
 
 	public List<Proveedor> getByCiudad(String ciudad) {
-		return proveedorRepo.findByCiudad_proveedor(ciudad);
+		return proveedorRepo.findByCiudadProveedor(ciudad);
 	}
 
 	public List<Proveedor> searchByNombre(String nombre) {
-		return proveedorRepo.findByNombre_proveedorContainingIgnoreCase(nombre);
+		return proveedorRepo.findByNombreProveedorContainingIgnoreCase(nombre);
 	}
 
 	public int updateById(Long id, ProveedorDTO dto) {
@@ -69,16 +69,16 @@ public class ProveedorService {
 
 		Proveedor proveedor = foundOpt.get();
 
-		if (!proveedor.getNit_proveedor().equals(dto.getNit_proveedor())
-				&& proveedorRepo.existsByNit_proveedor(dto.getNit_proveedor())) {
+		if (!proveedor.getNitProveedor().equals(dto.getNitProveedor())
+				&& proveedorRepo.existsByNitProveedor(dto.getNitProveedor())) {
 			return 1;
 		}
 
-		proveedor.setCiudad_proveedor(dto.getCiudad_proveedor());
-		proveedor.setDireccion_proveedor(dto.getDireccion_proveedor());
-		proveedor.setNit_proveedor(dto.getNit_proveedor());
-		proveedor.setNombre_proveedor(dto.getNombre_proveedor());
-		proveedor.setTelefono_proveedor(dto.getTelefono_proveedor());
+		proveedor.setCiudadProveedor(dto.getCiudadProveedor());
+		proveedor.setDireccionProveedor(dto.getDireccionProveedor());
+		proveedor.setNitProveedor(dto.getNitProveedor());
+		proveedor.setNombreProveedor(dto.getNombreProveedor());
+		proveedor.setTelefonoProveedor(dto.getTelefonoProveedor());
 
 		proveedorRepo.save(proveedor);
 

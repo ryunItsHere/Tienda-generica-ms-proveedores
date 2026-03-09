@@ -10,10 +10,10 @@ import co.edu.unbosque.TiendaGenericaProveedores.model.Proveedor;
 @Repository
 public interface ProveedorRepository extends JpaRepository<Proveedor, Long> {
 
+	boolean existsByNitProveedor(Integer nitProveedor);
 
-	boolean existsByNit_proveedor(Integer nit_proveedor);
+	List<Proveedor> findByCiudadProveedor(String ciudadProveedor);
 
-	List<Proveedor> findByCiudad_proveedor(String ciudad_proveedor);
+	List<Proveedor> findByNombreProveedorContainingIgnoreCase(String nombreProveedor);
 
-	List<Proveedor> findByNombre_proveedorContainingIgnoreCase(String nombre_proveedor);
 }
