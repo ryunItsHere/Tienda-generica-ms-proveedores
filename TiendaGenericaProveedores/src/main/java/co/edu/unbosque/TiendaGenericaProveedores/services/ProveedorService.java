@@ -25,7 +25,7 @@ public class ProveedorService {
 
 	public int create(ProveedorDTO dto) {
 
-		if (proveedorRepo.existsByNit(dto.getNit_proveedor())) {
+		if (proveedorRepo.existsByNit_proveedor(dto.getNit_proveedor())) {
 			return 1;
 		}
 
@@ -52,11 +52,11 @@ public class ProveedorService {
 	}
 
 	public List<Proveedor> getByCiudad(String ciudad) {
-		return proveedorRepo.findByCiudad(ciudad);
+		return proveedorRepo.findByCiudad_proveedor(ciudad);
 	}
 
 	public List<Proveedor> searchByNombre(String nombre) {
-		return proveedorRepo.findByNombreContainingIgnoreCase(nombre);
+		return proveedorRepo.findByNombre_proveedorContainingIgnoreCase(nombre);
 	}
 
 	public int updateById(Long id, ProveedorDTO dto) {
@@ -70,7 +70,7 @@ public class ProveedorService {
 		Proveedor proveedor = foundOpt.get();
 
 		if (!proveedor.getNit_proveedor().equals(dto.getNit_proveedor())
-				&& proveedorRepo.existsByNit(dto.getNit_proveedor())) {
+				&& proveedorRepo.existsByNit_proveedor(dto.getNit_proveedor())) {
 			return 1;
 		}
 
