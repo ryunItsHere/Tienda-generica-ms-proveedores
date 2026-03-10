@@ -15,7 +15,8 @@ import co.edu.unbosque.TiendaGenericaProveedores.services.ProveedorService;
 
 @RestController
 @RequestMapping("/proveedor")
-@CrossOrigin(origins = { "http://localhost:8080", "http://localhost:8081", "*" })
+@CrossOrigin(origins = { "http://localhost:8080",
+		"http://localhost:8081", "*" })
 @Transactional
 public class ProveedorController {
 
@@ -25,107 +26,150 @@ public class ProveedorController {
 	public ProveedorController() {
 	}
 
-	@PostMapping(path = "/createjson", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> createNewWithJSON(@RequestBody ProveedorDTO proveedorDTO) {
+	// ─────────────────────────────────────────
+	// CREATE
+	// ─────────────────────────────────────────
+	@PostMapping(
+			path = "/createjson",
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> createNewWithJSON(
+			@RequestBody ProveedorDTO proveedorDTO) {
 
 		int status = proveedorServ.create(proveedorDTO);
 
 		switch (status) {
-		case 0:
-			return new ResponseEntity<>("Proveedor creado correctamente", HttpStatus.CREATED);
-		case 1:
-			return new ResponseEntity<>("Error al crear proveedor, NIT ya en uso", HttpStatus.NOT_ACCEPTABLE);
-		default:
-			return new ResponseEntity<>("Error al crear proveedor", HttpStatus.INTERNAL_SERVER_ERROR);
+			case 0:
+				return new ResponseEntity<>(
+						"Proveedor creado correctamente",
+						HttpStatus.CREATED);
+			case 1:
+				return new ResponseEntity<>(
+						"Error al crear proveedor, NIT ya en uso",
+						HttpStatus.NOT_ACCEPTABLE);
+			default:
+				return new ResponseEntity<>(
+						"Error al crear proveedor",
+						HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
+	// ─────────────────────────────────────────
+	// READ
+	// ─────────────────────────────────────────
 	@GetMapping("/getall")
 	public ResponseEntity<List<Proveedor>> getAll() {
-
 		List<Proveedor> proveedores = proveedorServ.getAll();
-
 		if (proveedores.isEmpty()) {
-			return new ResponseEntity<>(proveedores, HttpStatus.NO_CONTENT);
-		} else {
-			return new ResponseEntity<>(proveedores, HttpStatus.OK);
+			return new ResponseEntity<>(
+					proveedores, HttpStatus.NO_CONTENT);
 		}
+		return new ResponseEntity<>(proveedores, HttpStatus.OK);
 	}
 
 	@GetMapping("/getbyid/{id}")
 	public ResponseEntity<Proveedor> getById(@PathVariable Long id) {
-
 		Proveedor found = proveedorServ.getById(id);
-
 		if (found != null) {
 			return new ResponseEntity<>(found, HttpStatus.OK);
-		} else {
-			return ResponseEntity.notFound().build();
 		}
+		return ResponseEntity.notFound().build();
 	}
 
-	@GetMapping("/exists/{id}")
-	public ResponseEntity<Boolean> exists(@PathVariable Long id) {
+	// ─────────────────────────────────────────
+	// ENDPOINTS POR NIT (integración MS-Productos)
+	// ─────────────────────────────────────────
 
-		boolean found = proveedorServ.exist(id);
-
+	// Verifica si existe por NIT → usado por MS-Productos
+	@GetMapping("/existsbynit/{nit}")
+	public ResponseEntity<Boolean> existsByNit(
+			@PathVariable Integer nit) {
+		boolean found = proveedorServ.existsByNit(nit);
 		if (found) {
 			return new ResponseEntity<>(true, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(false, HttpStatus.NO_CONTENT);
 		}
+		return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
 
-	@GetMapping("/getbyciudad")
-	public ResponseEntity<List<Proveedor>> getByCiudad(@RequestParam String ciudad) {
-
-		List<Proveedor> result = proveedorServ.getByCiudad(ciudad);
-
-		if (result.isEmpty()) {
-			return new ResponseEntity<>(result, HttpStatus.NO_CONTENT);
-		} else {
-			return new ResponseEntity<>(result, HttpStatus.OK);
+	// Retorna proveedor completo por NIT
+	@GetMapping("/getbynit/{nit}")
+	public ResponseEntity<Proveedor> getByNit(
+			@PathVariable Integer nit) {
+		Proveedor found = proveedorServ.getByNit(nit);
+		if (found != null) {
+			return new ResponseEntity<>(found, HttpStatus.OK);
 		}
+		return ResponseEntity.notFound().build();
+	}
+
+	// ─────────────────────────────────────────
+	// BÚSQUEDAS ADICIONALES
+	// ─────────────────────────────────────────
+	@GetMapping("/getbyciudad")
+	public ResponseEntity<List<Proveedor>> getByCiudad(
+			@RequestParam String ciudad) {
+		List<Proveedor> result = proveedorServ.getByCiudad(ciudad);
+		if (result.isEmpty()) {
+			return new ResponseEntity<>(
+					result, HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 
 	@GetMapping("/searchbyname")
-	public ResponseEntity<List<Proveedor>> searchByNombre(@RequestParam String nombre) {
-
+	public ResponseEntity<List<Proveedor>> searchByNombre(
+			@RequestParam String nombre) {
 		List<Proveedor> result = proveedorServ.searchByNombre(nombre);
-
 		if (result.isEmpty()) {
-			return new ResponseEntity<>(result, HttpStatus.NO_CONTENT);
-		} else {
-			return new ResponseEntity<>(result, HttpStatus.OK);
+			return new ResponseEntity<>(
+					result, HttpStatus.NO_CONTENT);
 		}
+		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 
-	@PutMapping(path = "/updatejson", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> updateWithJSON(@RequestParam Long id, @RequestBody ProveedorDTO proveedorDTO) {
+	// ─────────────────────────────────────────
+	// UPDATE
+	// ─────────────────────────────────────────
+	@PutMapping(
+			path = "/updatejson",
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> updateWithJSON(
+			@RequestParam Long id,
+			@RequestBody ProveedorDTO proveedorDTO) {
 
 		int status = proveedorServ.updateById(id, proveedorDTO);
 
 		switch (status) {
-		case 0:
-			return new ResponseEntity<>("Proveedor actualizado correctamente", HttpStatus.OK);
-		case 1:
-			return new ResponseEntity<>("NIT ya en uso", HttpStatus.CONFLICT);
-		case 2:
-			return new ResponseEntity<>("Proveedor no encontrado", HttpStatus.NOT_FOUND);
-		default:
-			return new ResponseEntity<>("Error al actualizar proveedor", HttpStatus.INTERNAL_SERVER_ERROR);
+			case 0:
+				return new ResponseEntity<>(
+						"Proveedor actualizado correctamente",
+						HttpStatus.OK);
+			case 1:
+				return new ResponseEntity<>(
+						"NIT ya en uso", HttpStatus.CONFLICT);
+			case 2:
+				return new ResponseEntity<>(
+						"Proveedor no encontrado",
+						HttpStatus.NOT_FOUND);
+			default:
+				return new ResponseEntity<>(
+						"Error al actualizar proveedor",
+						HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
+	// ─────────────────────────────────────────
+	// DELETE
+	// ─────────────────────────────────────────
 	@DeleteMapping("/deletebyid/{id}")
 	public ResponseEntity<String> deleteById(@PathVariable Long id) {
-
 		int status = proveedorServ.deleteById(id);
-
 		if (status == 0) {
-			return new ResponseEntity<>("Proveedor eliminado correctamente", HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("Error al eliminar proveedor, no encontrado", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(
+					"Proveedor eliminado correctamente", HttpStatus.OK);
 		}
+		return new ResponseEntity<>(
+				"Error al eliminar proveedor, no encontrado",
+				HttpStatus.NOT_FOUND);
 	}
 }

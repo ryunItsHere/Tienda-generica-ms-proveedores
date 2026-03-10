@@ -96,4 +96,14 @@ public class ProveedorService {
 			return 1;
 		}
 	}
+	// Verifica si existe por NIT (para MS-Productos)
+	public boolean existsByNit(Integer nit) {
+		return proveedorRepo.existsByNitProveedor(nit);
+	}
+
+	// Retorna el proveedor completo por NIT
+	public Proveedor getByNit(Integer nit) {
+		Optional<Proveedor> found = proveedorRepo.findByNitProveedor(nit);
+		return found.orElse(null);
+	}
 }
