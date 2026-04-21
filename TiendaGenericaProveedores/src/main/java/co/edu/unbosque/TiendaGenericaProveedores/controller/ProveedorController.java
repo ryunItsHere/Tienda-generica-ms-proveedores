@@ -15,8 +15,7 @@ import co.edu.unbosque.TiendaGenericaProveedores.services.ProveedorService;
 
 @RestController
 @RequestMapping("/proveedor")
-@CrossOrigin(origins = { "http://localhost:8080",
-		"http://localhost:8081", "*" })
+@CrossOrigin(origins = "*") // <--- CAMBIO 1: Vital para que el Frontend no se bloquee (CORS)
 @Transactional
 public class ProveedorController {
 
@@ -26,44 +25,33 @@ public class ProveedorController {
 	public ProveedorController() {
 	}
 
-	// ─────────────────────────────────────────
 	// CREATE
-	// ─────────────────────────────────────────
 	@PostMapping(
 			path = "/createjson",
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> createNewWithJSON(
-			@RequestBody ProveedorDTO proveedorDTO) {
+	public ResponseEntity<?> createNewWithJSON(@RequestBody ProveedorDTO proveedorDTO) {
+		// CAMBIO 2: Cambié ResponseEntity<String> a ResponseEntity<?>
+		// para evitar errores de renderizado en React si devuelve texto plano.
 
 		int status = proveedorServ.create(proveedorDTO);
 
 		switch (status) {
 			case 0:
-				return new ResponseEntity<>(
-						"Proveedor creado correctamente",
-						HttpStatus.CREATED);
+				return new ResponseEntity<>(proveedorDTO, HttpStatus.CREATED);
 			case 1:
-				return new ResponseEntity<>(
-						"Error al crear proveedor, NIT ya en uso",
-						HttpStatus.NOT_ACCEPTABLE);
+				return new ResponseEntity<>("NIT ya en uso", HttpStatus.BAD_REQUEST);
 			default:
-				return new ResponseEntity<>(
-						"Error al crear proveedor",
-						HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<>("Error interno", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	// ─────────────────────────────────────────
 	// READ
-	// ─────────────────────────────────────────
 	@GetMapping("/getall")
 	public ResponseEntity<List<Proveedor>> getAll() {
 		List<Proveedor> proveedores = proveedorServ.getAll();
-		if (proveedores.isEmpty()) {
-			return new ResponseEntity<>(
-					proveedores, HttpStatus.NO_CONTENT);
-		}
+		// CAMBIO 3: React explota si recibe NO_CONTENT (204).
+		// Es mejor devolver una lista vacía [] con un OK (200).
 		return new ResponseEntity<>(proveedores, HttpStatus.OK);
 	}
 
