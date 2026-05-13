@@ -14,8 +14,7 @@ import co.edu.unbosque.TiendaGenericaProveedores.model.Proveedor;
 import co.edu.unbosque.TiendaGenericaProveedores.services.ProveedorService;
 
 @RestController
-@RequestMapping("/proveedor")
-@CrossOrigin(origins = "*") // <--- CAMBIO 1: Vital para que el Frontend no se bloquee (CORS)
+@RequestMapping("/proveedor") // <--- CAMBIO 1: Vital para que el Frontend no se bloquee (CORS)
 @Transactional
 public class ProveedorController {
 
